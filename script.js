@@ -1,35 +1,46 @@
-const urlAPI = 'https://digimon-api.vercel.app/api/digimon/';
+const BASE_URL = 'https://digimon-api.vercel.app/api/digimon/level/';
 
-const showDigimons = async() => {
-    //const img = document.getElementById('img')
-    try{
-        const DATA = await fetch(urlAPI);
-        const DATA_JSON =  await DATA.json();
+const getDigimonByLevel = async(levelStatus, imgDigimon) => {
+    const DATA = await fetch(BASE_URL + levelStatus);
+    const DATA_JSON = await DATA.json();
+    for(let i = 0; i < DATA_JSON.length; i++){                
+        newImg = document.createElement('img');
+        newImg.src = DATA_JSON[i].img;
+        imgDigimon.appendChild(newImg)
+    }        
+}
 
-        for(let i = 0; i < DATA_JSON.length; i++){
-            const container = document.getElementById('container');
-            const img = document.createElement('img');
-            img.setAttribute('width', '300px');
-            img.src = DATA_JSON[i].img;
+const showDigimons = async() => {    
+    const levels = [
+        'intraining',
+        'rookie',
+        'fresh',
+        'ultimate',
+        'champion',
+        'mega'
+    ]
+    
+    const container = document.getElementById('container');
+    const img = document.createElement('img');
 
-            container.appendChild(img)
-            //return DATA_JSON[i].img;
-        }
-        
-        //console.log(DATA_JSON[0].img)
+    const inTraining = document.getElementById('in-training');
+    const rookie = document.getElementById('rookie');
+    const fresh = document.getElementById('fresh');
+    const ultimate = document.getElementById('ultimate');    
+    const champion = document.getElementById('champion');    
+    const mega = document.getElementById('mega');
+
+    try{               
+        getDigimonByLevel(levels[0], inTraining);
+        getDigimonByLevel(levels[1], rookie);
+        getDigimonByLevel(levels[2], fresh);
+        getDigimonByLevel(levels[3], ultimate);
+        getDigimonByLevel(levels[4], champion);
+        getDigimonByLevel(levels[5], mega);
     }
     catch(error){
         console.log(error.message);
     }
-}
-
-const IMAGE = async() => {
-    const container = document.getElementById('container');
-    const img = document.createElement('img');
-    img.setAttribute('width', '300px');
-    img.src = await showDigimons();
-
-    container.appendChild(img)
 }
 
 showDigimons();

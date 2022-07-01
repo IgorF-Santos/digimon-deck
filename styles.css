@@ -1,3 +1,112 @@
-img{
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    height: 550px;
+    align-items: center;    
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #4169E1;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;    
+    width: 60%
+}
+
+header .image{
+    align-self: flex-end;
+    /* border: 2px solid red; */
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 10px 10px 18px #000;
+}
+
+header .image img{
+    width: 350px;
+}
+
+label{
+    font-size: 92px;
+    font-weight: bold;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image: url('./images/text-background2.jpeg');
+    text-transform: uppercase;  
+    align-self: flex-start;    
+}
+
+#container{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+
+#container .cards{    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: center;
+    margin-bottom: 4%;
+    width: 85%;
+    border-radius: 20px;
+    padding: 2%;    
+}
+
+.cards:nth-child(1){
+    background-color: #B0E0E6;
+}
+.cards:nth-child(2){
+    background-color: #00FF7F;
+}
+.cards:nth-child(3){
+    background-color: #FFDEAD;
+}
+.cards:nth-child(4){
+    background-color: #FFD700;
+}
+.cards:nth-child(5){
+    background-color: #FF8C00;
+}
+.cards:nth-child(6){
+    background-color: #FF4500;
+}
+
+
+#container .cards div{
+    display: flex;
+    flex-wrap: wrap;
     border: 1px solid #000;
+    width: 85%;
+    align-self: center;
+    justify-content: center;
+}
+
+#container .cards div img{
+    width: 200px;
+    cursor: pointer;
+    transition: 1s;
+    box-shadow: 2px 2px 10px #000;
+    margin-right: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+footer{
+    background-color: #4169E1;
+    height: 200px;
 }
