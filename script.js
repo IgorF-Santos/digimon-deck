@@ -3,10 +3,17 @@ const BASE_URL = 'https://digimon-api.vercel.app/api/digimon/level/';
 const getDigimonByLevel = async(levelStatus, imgDigimon) => {
     const DATA = await fetch(BASE_URL + levelStatus);
     const DATA_JSON = await DATA.json();
-    for(let i = 0; i < DATA_JSON.length; i++){                
+    for(let i = 0; i < DATA_JSON.length; i++){   
+        containerDigimon = document.createElement('div');
         newImg = document.createElement('img');
+        nameDigimon = document.createElement('label');
+        containerDigimon.className = 'container-digimon';
+
         newImg.src = DATA_JSON[i].img;
-        imgDigimon.appendChild(newImg)
+        nameDigimon.textContent = DATA_JSON[i].name;
+        imgDigimon.appendChild(containerDigimon);
+        containerDigimon.appendChild(newImg)
+        containerDigimon.appendChild(nameDigimon);        
     }        
 }
 
