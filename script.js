@@ -4,16 +4,21 @@ const getDigimonByLevel = async(levelStatus, imgDigimon) => {
     const DATA = await fetch(BASE_URL + levelStatus);
     const DATA_JSON = await DATA.json();
     for(let i = 0; i < DATA_JSON.length; i++){   
-        containerDigimon = document.createElement('div');
+        digimonContainer = document.createElement('div');
+        textContainer = document.createElement('div');
         newImg = document.createElement('img');
         nameDigimon = document.createElement('label');
-        containerDigimon.className = 'container-digimon';
+        
+
+        digimonContainer.className = 'digimon-container';
+        textContainer.className = 'text-container';
 
         newImg.src = DATA_JSON[i].img;
         nameDigimon.textContent = DATA_JSON[i].name;
-        imgDigimon.appendChild(containerDigimon);
-        containerDigimon.appendChild(newImg)
-        containerDigimon.appendChild(nameDigimon);        
+        imgDigimon.appendChild(digimonContainer);
+        digimonContainer.appendChild(newImg)
+        digimonContainer.appendChild(textContainer);
+        textContainer.appendChild(nameDigimon);        
     }        
 }
 
