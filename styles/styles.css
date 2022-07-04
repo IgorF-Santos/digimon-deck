@@ -43,7 +43,7 @@ header .image img{
     -webkit-background-clip: text;
     background-color: transparent;
     -webkit-text-fill-color: transparent;
-    background-image: url('./images/text-background2.jpeg');
+    background-image: url('../images/text-background.jpeg');
     text-transform: uppercase;  
     align-self: flex-start;    
 }
