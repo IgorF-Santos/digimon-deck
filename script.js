@@ -1,6 +1,5 @@
 const BASE_URL = 'https://digimon-api.vercel.app/api/digimon/level/';
 const BASE_URL_NAME = 'https://digimon-api.vercel.app/api/digimon/name/';
-//const CARDS_URL = 'https://digimoncard.io/api-public/search.php?type=digimon&sort=name&sortdirection=desc&series=Digimon%20Card%20Game';
 const CARDS_URL = 'https://digimoncard.io/api-public/search.php?&sort=name&sortdirection=desc';
 
 const getDigimonByName = async(nomeDoDigimon) => {
@@ -51,9 +50,12 @@ const getCards = async(nomeDigimon) => {
 }
 
 const getDigimonCards = async() => {
+    const body = document.querySelector('body');   
+    const disableScroll = () => body.style.overflowY = 'hidden';
+    const enableScroll = () => body.style.overflowY = 'scroll';
+
     const digimonContainer = document.getElementsByClassName('digimon-container');
-    const CARDS_CONTENT = document.getElementsByClassName('cards-content');
-    const ahhh = document.getElementById('in-training');        
+    const CARDS_CONTENT = document.getElementsByClassName('cards-content');         
     const cards = document.getElementsByClassName('cards');  
 
     const MY_CAROUSEL = document.createElement('div');
@@ -193,57 +195,76 @@ const getDigimonCards = async() => {
 
                 informationContainer.appendChild(digimonLevelDiv);
                 digimonLevelDiv.appendChild(digimonLevel);
-                digimonLevelDiv.appendChild(digimonLevelContent);
+                digimonLevelDiv.appendChild(digimonLevelContent);                
 
                 if(digimonContainer[i].parentElement.id === 'in-training'){
                     CARDS_CONTENT[0].appendChild(MY_CAROUSEL);
                     cards[0].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
+                    //body.style.overflowY = 'hidden';
                 }
                 else if(digimonContainer[i].parentElement.id === 'rookie'){
                     CARDS_CONTENT[1].appendChild(MY_CAROUSEL);
                     cards[1].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[1].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
                 }
                 else if(digimonContainer[i].parentElement.id === 'fresh'){
                     CARDS_CONTENT[2].appendChild(MY_CAROUSEL);
                     cards[2].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[2].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
                 }
                 else if(digimonContainer[i].parentElement.id === 'ultimate'){
                     CARDS_CONTENT[3].appendChild(MY_CAROUSEL);
                     cards[3].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[3].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
                 }
                 else if(digimonContainer[i].parentElement.id === 'champion'){
                     CARDS_CONTENT[4].appendChild(MY_CAROUSEL);
                     cards[4].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[4].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
                 }
                 else if(digimonContainer[i].parentElement.id === 'mega'){
                     CARDS_CONTENT[5].appendChild(MY_CAROUSEL);
                     cards[5].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    CARDS_CONTENT[5].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    setTimeout(disableScroll, 1800)
                 }            
 
                 closeButton.onclick = () => {                                                                    
                     if(digimonContainer[i].parentElement.id === 'in-training'){
                         CARDS_CONTENT[0].removeChild(MY_CAROUSEL);
                         cards[0].style.backgroundColor = 'rgba(176,224,230,1)';
+                        enableScroll();
                     }
                     else if(digimonContainer[i].parentElement.id === 'rookie'){
                         CARDS_CONTENT[1].removeChild(MY_CAROUSEL);
                         cards[1].style.backgroundColor = 'rgba(0,255,127,1)';
+                        enableScroll();
                     }
                     else if(digimonContainer[i].parentElement.id === 'fresh'){
                         CARDS_CONTENT[2].removeChild(MY_CAROUSEL);
                         cards[2].style.backgroundColor = 'rgba(255,222,173,1)';
+                        enableScroll();
                     }
                     else if(digimonContainer[i].parentElement.id === 'ultimate'){
                         CARDS_CONTENT[3].removeChild(MY_CAROUSEL);
                         cards[3].style.backgroundColor = 'rgba(255,215,0,1)';
+                        enableScroll();
                     }
                     else if(digimonContainer[i].parentElement.id === 'champion'){
                         CARDS_CONTENT[4].removeChild(MY_CAROUSEL);
                         cards[4].style.backgroundColor = 'rgba(255,140,0,1)';
+                        enableScroll();
                     }
                     else if(digimonContainer[i].parentElement.id === 'mega'){
                         CARDS_CONTENT[5].removeChild(MY_CAROUSEL);
                         cards[5].style.backgroundColor = 'rgba(255,69,0,1)';
+                        enableScroll();
                     }
                 }
 
