@@ -39,10 +39,14 @@ const getCards = async(nomeDigimon) => {
     const CARDS_DATA = await fetch(CARDS_URL + '&n=' + nomeDigimon);
     const ARRAY_CARDS_DATA_JSON = await CARDS_DATA.json();        
 
-    try{        
-        const retorno = ARRAY_CARDS_DATA_JSON[Math.floor(Math.random() * (ARRAY_CARDS_DATA_JSON).length)];
-        return retorno;
-        //return './images/group.jpg'
+    try{   
+        if(!ARRAY_CARDS_DATA_JSON || ARRAY_CARDS_DATA_JSON === undefined || ARRAY_CARDS_DATA_JSON.length < 1){
+            return undefined;         
+        }
+        else{
+            const retorno = ARRAY_CARDS_DATA_JSON[Math.floor(Math.random() * (ARRAY_CARDS_DATA_JSON).length)];
+            return retorno;
+        }        
     }
     catch(e){
         console.log(e);
@@ -133,39 +137,45 @@ const getDigimonCards = async() => {
     for(let i = 0; i < CARDS_CONTENT.length; i++){
         for(let i = 0; i < digimonContainer.length; i++){
             digimonContainer[i].onclick = async () => {
-                getCardsReturn = await getCards(digimonContainer[i].id);
+                try{                    
+                    getCardsReturn = await getCards(digimonContainer[i].id);
+                    
+                }
+                catch(e){
+                    console.log(e);
+                }
 
-                if(getCardsReturn.image_url === null){
-                    console.log('oops, imagemnão existe');
+                if(getCardsReturn === undefined || getCardsReturn.image_url === null || !getCardsReturn){
+                    imgCarousel.src = './images/card-verse.jpg';
                 }
                 else{
                     imgCarousel.src = getCardsReturn.image_url;
                 }
-                if(getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
+                if(getCardsReturn === undefined || getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
                     nomeDigimonContent.textContent = 'Desconhecido';
                 }
                 else{
                     nomeDigimonContent.textContent = getCardsReturn.name;
                 }
-                if(getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
+                if(getCardsReturn === undefined || getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
                     colorDigimonContent.textContent = 'Desconhecido';
                 }
                 else{
                     colorDigimonContent.textContent = getCardsReturn.color;
                 }
-                if(getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
+                if(getCardsReturn === undefined || getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
                     digimonTypeContent.textContent = 'Desconhecido';
                 }
                 else{
                     digimonTypeContent.textContent = getCardsReturn.digi_type;
                 }
-                if(getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
+                if(getCardsReturn === undefined || getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
                     cardRarityContent.textContent = 'Desconhecido';
                 }
                 else{
                     cardRarityContent.textContent = getCardsReturn.cardrarity;
                 }
-                if(getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
+                if(getCardsReturn === undefined || getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
                     digimonLevelContent.textContent = 'Desconhecido';
                 }
                 else{
@@ -271,37 +281,37 @@ const getDigimonCards = async() => {
                 buttonChangeCard.onclick = async () => {
                     getCardsReturn = await getCards(digimonContainer[i].id)
                     
-                    if(getCardsReturn.image_url === null){
-                        console.log('oops, imagemnão existe');
+                    if(getCardsReturn === undefined || getCardsReturn.image_url === null){
+                        imgCarousel.src = './images/card-verse.jpg';
                     }
                     else{
                         imgCarousel.src = getCardsReturn.image_url;
                     }
-                    if(getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
+                    if(getCardsReturn === undefined || getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
                         nomeDigimonContent.textContent = 'Desconhecido';
                     }
                     else{
                         nomeDigimonContent.textContent = getCardsReturn.name;
                     }
-                    if(getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
+                    if(getCardsReturn === undefined || getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
                         colorDigimonContent.textContent = 'Desconhecido';
                     }
                     else{
                         colorDigimonContent.textContent = getCardsReturn.color;
                     }
-                    if(getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
+                    if(getCardsReturn === undefined || getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
                         digimonTypeContent.textContent = 'Desconhecido';
                     }
                     else{
                         digimonTypeContent.textContent = getCardsReturn.digi_type;
                     }
-                    if(getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
+                    if(getCardsReturn === undefined || getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
                         cardRarityContent.textContent = 'Desconhecido';
                     }
                     else{
                         cardRarityContent.textContent = getCardsReturn.cardrarity;
                     }
-                    if(getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
+                    if(getCardsReturn === undefined || getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
                         digimonLevelContent.textContent = 'Desconhecido';
                     }
                     else{
