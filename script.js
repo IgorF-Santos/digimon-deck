@@ -1,12 +1,22 @@
 const BASE_URL = 'https://digimon-api.vercel.app/api/digimon/level/';
-const CARDS_URL = 'https://digimoncard.io/api-public/search.php?n=Agumon&type=digimon&sort=name&sortdirection=desc&series=Digimon%20Card%20Game';
+const BASE_URL_NAME = 'https://digimon-api.vercel.app/api/digimon/name/';
+//const CARDS_URL = 'https://digimoncard.io/api-public/search.php?type=digimon&sort=name&sortdirection=desc&series=Digimon%20Card%20Game';
+const CARDS_URL = 'https://digimoncard.io/api-public/search.php?&sort=name&sortdirection=desc';
+
+const getDigimonByName = async(nomeDoDigimon) => {
+    const DATA = await fetch(BASE_URL_NAME + nomeDoDigimon);
+    const DATA_JSON = await DATA.json();
+
+    return DATA_JSON.name
+}
 
 const getDigimonByLevel = async(levelStatus, imgDigimon) => {
     const DATA = await fetch(BASE_URL + levelStatus);
     const DATA_JSON = await DATA.json();
     
     for(let i = 0; i < DATA_JSON.length; i++){   
-        digimonContainer = document.createElement('div');
+        const digimonContainer = document.createElement('div');
+        digimonContainer.setAttribute('id', DATA_JSON[i].name)
         textContainer = document.createElement('div');
         newImg = document.createElement('img');
         nameDigimon = document.createElement('label');
@@ -23,41 +33,24 @@ const getDigimonByLevel = async(levelStatus, imgDigimon) => {
         textContainer.appendChild(nameDigimon);        
     }   
     
-    getDigimonCards(DATA_JSON[0].name)
+    getDigimonCards()
 }
 
-const getCards = async() => {
-    /* const CARDS_DATA = await fetch(CARDS_URL);
-    const ARRAY_CARDS_DATA_JSON = await CARDS_DATA.json();
-    const OBJECT_CARDS_DATA_JSON = await ARRAY_CARDS_DATA_JSON; */
-    
+const getCards = async(nomeDigimon) => {
+    const CARDS_DATA = await fetch(CARDS_URL + '&n=' + nomeDigimon);
+    const ARRAY_CARDS_DATA_JSON = await CARDS_DATA.json();        
 
     try{        
-       /*  const retorno = ARRAY_CARDS_DATA_JSON[Math.floor(Math.random() * (ARRAY_CARDS_DATA_JSON).length)]; */
-        //return retorno.image_url;       
-        return './images/group.jpg'
+        const retorno = ARRAY_CARDS_DATA_JSON[Math.floor(Math.random() * (ARRAY_CARDS_DATA_JSON).length)];
+        return retorno;
+        //return './images/group.jpg'
     }
     catch(e){
         console.log(e);
     }
-
-   /*  for(let i = 0; i < CARDS_DATA_JSON.length; i++){
-        const item = document.createElement('div');
-        item.className = 'item';
-        const imgCarousel = document.createElement('img');
-        imgCarousel.setAttribute('alt', CARDS_DATA_JSON[i].name);
-        imgCarousel.setAttribute('src', CARDS_DATA_JSON[i].image_url);
-        imgCarousel.className = 'box-filmes';
-        
-        
-        item.appendChild(imgCarousel);
-        MY_CAROUSEL.appendChild(item)
-        //ownCarousel.appendChild(item);
-        //console.log(item)
-    } */
 }
 
-const getDigimonCards = async(apiReturn) => {
+const getDigimonCards = async() => {
     const digimonContainer = document.getElementsByClassName('digimon-container');
     const CARDS_CONTENT = document.getElementsByClassName('cards-content');
     const ahhh = document.getElementById('in-training');        
@@ -117,7 +110,7 @@ const getDigimonCards = async(apiReturn) => {
     informationContainer.setAttribute('id','information-container');   
     mainCarouselDiv.setAttribute('id', 'main-carousel-div');    
 
-    imgCarousel.src = await getCards();
+    
                       
     nomeDigimon.textContent = 'Nome';
     colorDigimon.textContent = 'Cor';
@@ -125,11 +118,7 @@ const getDigimonCards = async(apiReturn) => {
     cardRarity.textContent = 'Raridade';
     digimonLevel.textContent = 'Nível';
 
-    nomeDigimonContent.textContent = apiReturn;
-    colorDigimonContent.textContent = apiReturn;
-    digimonTypeContent.textContent = apiReturn;
-    cardRarityContent.textContent = apiReturn;
-    digimonLevelContent.textContent = '3'
+   
 
     //imgCarousel.setAttribute('alt', CARDS_DATA_JSON[i].name);        
     
@@ -141,7 +130,46 @@ const getDigimonCards = async(apiReturn) => {
     
     for(let i = 0; i < CARDS_CONTENT.length; i++){
         for(let i = 0; i < digimonContainer.length; i++){
-            digimonContainer[i].onclick = () => {                                                                                    
+            digimonContainer[i].onclick = async () => {
+                getCardsReturn = await getCards(digimonContainer[i].id);
+
+                if(getCardsReturn.image_url === null){
+                    console.log('oops, imagemnão existe');
+                }
+                else{
+                    imgCarousel.src = getCardsReturn.image_url;
+                }
+                if(getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
+                    nomeDigimonContent.textContent = 'Desconhecido';
+                }
+                else{
+                    nomeDigimonContent.textContent = getCardsReturn.name;
+                }
+                if(getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
+                    colorDigimonContent.textContent = 'Desconhecido';
+                }
+                else{
+                    colorDigimonContent.textContent = getCardsReturn.color;
+                }
+                if(getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
+                    digimonTypeContent.textContent = 'Desconhecido';
+                }
+                else{
+                    digimonTypeContent.textContent = getCardsReturn.digi_type;
+                }
+                if(getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
+                    cardRarityContent.textContent = 'Desconhecido';
+                }
+                else{
+                    cardRarityContent.textContent = getCardsReturn.cardrarity;
+                }
+                if(getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
+                    digimonLevelContent.textContent = 'Desconhecido';
+                }
+                else{
+                    digimonLevelContent.textContent = getCardsReturn.level;
+                }
+
                 closeButton.appendChild(closeButtonText)
                 MY_CAROUSEL.appendChild(closeButton);
                 MY_CAROUSEL.appendChild(mainCarouselDiv);
@@ -192,7 +220,7 @@ const getDigimonCards = async(apiReturn) => {
                     cards[5].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }            
 
-                closeButton.onclick = () =>{                                                                    
+                closeButton.onclick = () => {                                                                    
                     if(digimonContainer[i].parentElement.id === 'in-training'){
                         CARDS_CONTENT[0].removeChild(MY_CAROUSEL);
                         cards[0].style.backgroundColor = 'rgba(176,224,230,1)';
@@ -216,6 +244,47 @@ const getDigimonCards = async(apiReturn) => {
                     else if(digimonContainer[i].parentElement.id === 'mega'){
                         CARDS_CONTENT[5].removeChild(MY_CAROUSEL);
                         cards[5].style.backgroundColor = 'rgba(255,69,0,1)';
+                    }
+                }
+
+                buttonChangeCard.onclick = async () => {
+                    getCardsReturn = await getCards(digimonContainer[i].id)
+                    
+                    if(getCardsReturn.image_url === null){
+                        console.log('oops, imagemnão existe');
+                    }
+                    else{
+                        imgCarousel.src = getCardsReturn.image_url;
+                    }
+                    if(getCardsReturn.name === null || (getCardsReturn.name)=== 'Unknown'){
+                        nomeDigimonContent.textContent = 'Desconhecido';
+                    }
+                    else{
+                        nomeDigimonContent.textContent = getCardsReturn.name;
+                    }
+                    if(getCardsReturn.color === null || (getCardsReturn.color)=== 'Unknown'){
+                        colorDigimonContent.textContent = 'Desconhecido';
+                    }
+                    else{
+                        colorDigimonContent.textContent = getCardsReturn.color;
+                    }
+                    if(getCardsReturn.digi_type === null || (getCardsReturn.digi_type) === 'Unknown'){
+                        digimonTypeContent.textContent = 'Desconhecido';
+                    }
+                    else{
+                        digimonTypeContent.textContent = getCardsReturn.digi_type;
+                    }
+                    if(getCardsReturn.cardrarity === null || (getCardsReturn.cardrarity) === 'Unknown'){
+                        cardRarityContent.textContent = 'Desconhecido';
+                    }
+                    else{
+                        cardRarityContent.textContent = getCardsReturn.cardrarity;
+                    }
+                    if(getCardsReturn.level === null || (getCardsReturn.level) === 'unknown'){
+                        digimonLevelContent.textContent = 'Desconhecido';
+                    }
+                    else{
+                        digimonLevelContent.textContent = getCardsReturn.level;
                     }
                 }
             }
