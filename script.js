@@ -138,9 +138,7 @@ const getDigimonCards = async(apiReturn) => {
     cardContainer.appendChild(buttonChangeCard);
     buttonChangeCard.appendChild(buttonChangeCardContent);
     mainCarouselDiv.appendChild(cardContainer);
-
-
-
+    
     for(let i = 0; i < CARDS_CONTENT.length; i++){
         for(let i = 0; i < digimonContainer.length; i++){
             digimonContainer[i].onclick = () => {                                                                                    
@@ -168,101 +166,61 @@ const getDigimonCards = async(apiReturn) => {
                 informationContainer.appendChild(digimonLevelDiv);
                 digimonLevelDiv.appendChild(digimonLevel);
                 digimonLevelDiv.appendChild(digimonLevelContent);
-                              
+
                 if(digimonContainer[i].parentElement.id === 'in-training'){
                     CARDS_CONTENT[0].appendChild(MY_CAROUSEL);
+                    cards[0].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }
                 else if(digimonContainer[i].parentElement.id === 'rookie'){
                     CARDS_CONTENT[1].appendChild(MY_CAROUSEL);
+                    cards[1].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }
                 else if(digimonContainer[i].parentElement.id === 'fresh'){
                     CARDS_CONTENT[2].appendChild(MY_CAROUSEL);
+                    cards[2].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }
                 else if(digimonContainer[i].parentElement.id === 'ultimate'){
                     CARDS_CONTENT[3].appendChild(MY_CAROUSEL);
+                    cards[3].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }
                 else if(digimonContainer[i].parentElement.id === 'champion'){
                     CARDS_CONTENT[4].appendChild(MY_CAROUSEL);
+                    cards[4].style.backgroundColor = 'rgba(0,0,0,0.5)';
                 }
                 else if(digimonContainer[i].parentElement.id === 'mega'){
                     CARDS_CONTENT[5].appendChild(MY_CAROUSEL);
-                }
-                    
-                for(let i = 0; i < cards.length; i++){
-                   // console.log(digimonContainer[i].parentElement.id)
+                    cards[5].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                }            
+
+                closeButton.onclick = () =>{                                                                    
                     if(digimonContainer[i].parentElement.id === 'in-training'){
-                        cards[0].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        CARDS_CONTENT[0].removeChild(MY_CAROUSEL);
+                        cards[0].style.backgroundColor = 'rgba(176,224,230,1)';
                     }
                     else if(digimonContainer[i].parentElement.id === 'rookie'){
-                        cards[1].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        CARDS_CONTENT[1].removeChild(MY_CAROUSEL);
+                        cards[1].style.backgroundColor = 'rgba(0,255,127,1)';
                     }
                     else if(digimonContainer[i].parentElement.id === 'fresh'){
-                        cards[2].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        CARDS_CONTENT[2].removeChild(MY_CAROUSEL);
+                        cards[2].style.backgroundColor = 'rgba(255,222,173,1)';
                     }
                     else if(digimonContainer[i].parentElement.id === 'ultimate'){
-                        cards[3].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        CARDS_CONTENT[3].removeChild(MY_CAROUSEL);
+                        cards[3].style.backgroundColor = 'rgba(255,215,0,1)';
                     }
                     else if(digimonContainer[i].parentElement.id === 'champion'){
-                        cards[4].style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        CARDS_CONTENT[4].removeChild(MY_CAROUSEL);
+                        cards[4].style.backgroundColor = 'rgba(255,140,0,1)';
                     }
                     else if(digimonContainer[i].parentElement.id === 'mega'){
-                        cards[5].style.backgroundColor = 'rgba(0,0,0,0.5)';
-                    }                    
-                }                
-            }        
-        }
+                        CARDS_CONTENT[5].removeChild(MY_CAROUSEL);
+                        cards[5].style.backgroundColor = 'rgba(255,69,0,1)';
+                    }
+                }
+            }
+        }        
     }
-
-    closeButton.onclick = () =>{        
-        for(let i = 0; i < (CARDS_CONTENT).length; i++){            
-            for(let i = 0; i < digimonContainer.length; i++){     
-                //console.log(digimonContainer[i].parentElement.id)                                               
-                if(digimonContainer[i].parentElement.id === 'in-training'){
-                    CARDS_CONTENT[0].removeChild(MY_CAROUSEL);
-                }
-                else if(digimonContainer[i].parentElement.id === 'rookie'){
-                    CARDS_CONTENT[1].removeChild(MY_CAROUSEL);
-                }
-                else if(digimonContainer[i].parentElement.id === 'fresh'){
-                    CARDS_CONTENT[2].removeChild(MY_CAROUSEL);
-                }
-                else if(digimonContainer[i].parentElement.id === 'ultimate'){
-                    CARDS_CONTENT[3].removeChild(MY_CAROUSEL);
-                }
-                else if(digimonContainer[i].parentElement.id === 'champion'){
-                    CARDS_CONTENT[4].removeChild(MY_CAROUSEL);
-                }
-                else if(digimonContainer[i].parentElement.id === 'mega'){
-                    CARDS_CONTENT[5].removeChild(MY_CAROUSEL);
-                }
-            }
-        }
-
-        //ahhh.removeChild(MY_CAROUSEL)         
-        for(let i = 0; i < cards.length; i++){
-            for(let i = 0; i < digimonContainer.length; i++){  
-                if(digimonContainer[i].parentElement.id === 'in-training'){
-                    cards[0].style.backgroundColor = 'rgba(176,224,230,1)';
-                }
-                else if(digimonContainer[i].parentElement.id === 'rookie'){
-                    cards[1].style.backgroundColor = 'rgba(0,255,127,1)';
-                }
-                else if(digimonContainer[i].parentElement.id === 'fresh'){
-                    cards[2].style.backgroundColor = 'rgba(255,222,173,1)';
-                }
-                else if(digimonContainer[i].parentElement.id === 'ultimate'){
-                    cards[3].style.backgroundColor = 'rgba(255,215,0,1)';
-                }
-                else if(digimonContainer[i].parentElement.id === 'champion'){
-                    cards[4].style.backgroundColor = 'rgba(255,140,0,1)';
-                }
-                else if(digimonContainer[i].parentElement.id === 'mega'){
-                    cards[5].style.backgroundColor = 'rgba(255,69,0,1)';
-                }     
-                //cards[i].style.backgroundColor = 'rgba(176,224,230,1)';
-            }
-        }
-    };      
 }
 
 const showDigimons = async() => {    
