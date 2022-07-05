@@ -6,6 +6,14 @@
     - <a href="https://documenter.getpostman.com/view/14059948/TzecB4fH">Digimon TCG API</a>
 
 
+
+#### Sobre a aplicação:
+
+- Os Digimons exibidos nos containers principais são separados por nível, todos vindo da <a href="https://digimon-api.vercel.app/">Digimon API</a>.
+- Ao clicar em qualquer Digimon, é aberto um segundo container carregando cartas aleatórias e suas respectivas informações, sendo trazidas pela <a href="https://documenter.getpostman.com/view/14059948/TzecB4fH">Digimon TCG API</a>.
+
+
+
 <div align="center">
     <img src="./images/header.png" alt="header" style="width: 600px">
     <img src="./images/cards-container-example.png" alt="Header" style="width: 600px">
